@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Registration Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #8EC5FC, #E0C3FC);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        input[type="file"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="password"]:focus,
+        input[type="file"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #03a9f4;
+        }
+
+        .btn {
+            width: 100%;
+            background: #03a9f4;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #0288d1;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Trip Registration Form</h3>
+    <form name="registration" action="registration" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" name="trip_from" placeholder="Trip From (Source)" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="trip_to" placeholder="Trip To (Destination)" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="meter_reading_before" placeholder="Meter Reading (Before)" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="meter_reading_after" placeholder="Meter Reading (After)" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="filled_fuel" placeholder="Filled Fuel (In Liters)" required>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" name="credit_point" placeholder="Credit Point" required>
+        </div>
+
+        <div class="form-group">
+            <label for="trip_mode">Trip Mode:</label>
+            <select name="trip_mode" required>
+                <option value="" disabled selected>Select mode</option>
+                <option value="Load">Load</option>
+                <option value="Empty">Empty</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="invoice_document">Invoice Document:</label>
+            <input type="file" name="invoice_document" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="note" placeholder="Note About The Trip" required>
+        </div>
+
+        <div class="form-group">
+            <label for="status_update">Status Update:</label>
+            <select name="status_update" required>
+                <option value="" disabled selected>Current Status</option>
+                <option value="start">Trip Start From Godown</option>
+                <option value="reachD">Reach Destination</option>
+                <option value="pick">Pick Up (Product)</option>
+                <option value="starts">Pick Up And Start Trip</option>
+                <option value="reachG">Reach Godown</option>
+                <option value="problem">Problem</option>
+                <option value="ongoing">Trip Ongoing</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="location" placeholder="Copy The Current Location" required>
+        </div>
+
+        <div class="form-group">
+            <label for="report_date">Report Date:</label>
+            <input type="date" name="report_date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="report_time">Report Time:</label>
+            <input type="time" name="report_time" required>
+        </div>
+
+        <div class="form-group">
+            <label for="trip_start_date">Trip Start Date:</label>
+            <input type="date" name="trip_start_date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="trip_end_date">Trip End Date:</label>
+            <input type="date" name="trip_end_date" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="category_name" placeholder="Category Name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="truck_weight_before">Truck Weight (Before Load):</label>
+            <input type="file" name="truck_weight_before" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <label for="truck_weight_after">Truck Weight (After Load):</label>
+            <input type="file" name="truck_weight_after" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <label for="truck_weight_godown">Truck Weight (After Reach Godown):</label>
+            <input type="file" name="truck_weight_godown" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+  

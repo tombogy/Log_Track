@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Driver Information</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+            max-width: 450px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        h3 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        label {
+            display: block;
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="number"] {
+            width: calc(100% - 24px);
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, input[type="number"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button, a {
+            padding: 12px 25px;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        button {
+            background-color: #28a745;
+            width: 48%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            background-color: #17a2b8;
+            width: 48%;
+        }
+        a:hover {
+            background-color: #138496;
+        }
+        .current-license {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .current-license img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Update Category Information</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">Category Name:</label>
+            <input type="text" id="name" name="name" value="{{ category.name }}" required>
+
+            <label for="tot_bag">Total No. of Bags:</label>
+            <input type="number" id="tot_bag" name="tot_bag" value="{{ category.tot_bag }}">
+
+            <label for="bag_wei">One Bag Weight:</label>
+            <input type="number" id="bag_wei" name="bag_wei" value="{{ category.bag_wei }}">
+
+            <label for="tot_wei">Total Weight:</label>
+            <input type="number" id="tot_wei" name="tot_wei" value="{{ category.tot_wei }}">
+
+            <div class="button-container">
+                <button type="submit">Update Category</button>
+                <br>
+                <a href="{% url 'category_home01' %}">Cancel</a>
+            </div>
+        </form> 
+    </div>
+</body>
+</html>

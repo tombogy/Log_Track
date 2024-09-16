@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-left h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+        .header-left p {
+            margin: 0;
+            font-size: 16px;
+            color: #777;
+        }
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+        .header-right a {
+            padding: 12px 20px;
+            border-radius: 6px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .header-right a.add-button {
+            background-color: #2196F3;
+        }
+        .header-right a.add-button:hover {
+            background-color: #1976D2;
+        }
+        .header-right a.back-button {
+            background-color: #4CAF50;
+        }
+        .header-right a.back-button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        th.actions, td.actions {
+            text-align: center;
+        }
+        td.actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        a.action-button {
+            padding: 8px 15px;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        a.update-button {
+            background-color: #2196F3;
+        }
+        a.update-button:hover {
+            background-color: #1976D2;
+        }
+        a.delete-button {
+            background-color: #e74c3c;
+        }
+        a.delete-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+    <script>
+        function confirmDelete(url) {
+            if (confirm('Are you sure you want to delete this driver?')) {
+                window.location.href = url;
+            }
+            return false; // Prevent default link action
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h2>Category Management</h2>
+                <p>Welcome, {{ request.user.email }}</p>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'category_add' %}" class="action-button add-button">Add Category</a>
+                <a href="{% url 'admin_home' %}" class="action-button back-button">Back</a>
+            </div>
+        </div>
+        <h3>Category List</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Total No.of Bags</th>
+                    <th>One Bag Weight (In kg)</th>
+                    <th>Total Weight (In kg)</th>
+                    <th class="actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.tot_bag }}</td>
+                        <td>{{ category.bag_wei }}</td>
+                        <td>{{ category.tot_wei }}</td>
+                        <td class="actions">
+                            <a href="{% url 'category_update' category.id %}" class="action-button update-button">Update</a>
+                            <a href="{% url 'category_delete' category.id %}" class="action-button delete-button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
